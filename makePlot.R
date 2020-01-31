@@ -17,11 +17,17 @@ corona <- rbind(
 )
 corona_gathered <- gather(corona, "type", "cases", -date)
 
-g <- ggplot(corona_gathered, mapping = aes(x = date, y = cases, color = type, fill = type))
+g <- ggplot(corona_gathered, 
+			mapping = aes(x = date, 
+						  y = cases, 
+						  color = type, 
+						  fill = type))
 
 png("corona.png", width = 600, height = 600)
 g + 
     geom_polygon(alpha = 0.1) + 
     scale_x_date() + 
-    scale_y_log10()
+    scale_y_log10() +
+    theme(text = element_text(size=14),
+          axis.text.x = element_text(angle=45, hjust=1)) 
 dev.off()
